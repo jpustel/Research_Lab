@@ -11,11 +11,11 @@ with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-mo = data.make_supercell((3,3,3))
+data.make_supercell((3,3,3))
 
 relaxer = Relaxer()  # This loads the default pre-trained model
 
-relax_results = relaxer.relax(mo, verbose=True)
+relax_results = relaxer.relax(data, verbose=True)
 
 final_structure = relax_results['final_structure']
 final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(mo))
