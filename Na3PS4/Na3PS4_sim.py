@@ -18,7 +18,7 @@ relaxer = Relaxer()  # This loads the default pre-trained model
 relax_results = relaxer.relax(data, verbose=True)
 
 final_structure = relax_results['final_structure']
-final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(mo))
+final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(data))
 
 print(f"Relaxed lattice parameter is {final_structure.lattice.abc[0]:.3f} Å")
 print(f"Final energy is {final_energy_per_atom:.3f} eV/atom")
