@@ -6,7 +6,7 @@ from pymatgen.core import Lattice, Structure
 
 from mp_api.client import MPRester
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
-    data = mpr.materials.get_data_by_id("mp-985584")
+    data = mpr.get_structure_by_material_id("mp-985584")
 
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
