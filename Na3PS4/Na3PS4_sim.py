@@ -11,9 +11,9 @@ with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-settings = MolecularDynamics(temperature = 350)
-
 data.make_supercell((3,3,3))
+
+settings = MolecularDynamics(atoms = data, temperature = 350)
 
 relaxer = Relaxer()  # This loads the default pre-trained model
 
