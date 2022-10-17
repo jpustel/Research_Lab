@@ -13,7 +13,11 @@ for category in (UserWarning, DeprecationWarning):
 
 data.make_supercell((3,3,3))
 
-settings = MolecularDynamics(atoms = data, temperature = 350)
+parameters = MolecularDynamics(atoms = data, temperature = 350)
+
+test = parameters.run(steps = 40)
+
+print(type(test))
 
 relaxer = Relaxer()  # This loads the default pre-trained model
 
