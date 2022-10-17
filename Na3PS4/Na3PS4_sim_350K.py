@@ -1,6 +1,6 @@
 import warnings
 
-from m3gnet.models import Relaxer
+from m3gnet.models import Relaxer, MolecularDynamics
 #from pymatgen.core import Lattice, Structure
 
 
@@ -12,6 +12,8 @@ for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
 data.make_supercell((3,3,3))
+
+settings = MolecularDynamics(atoms = data, temperature = 350)
 
 relaxer = Relaxer()  # This loads the default pre-trained model
 
