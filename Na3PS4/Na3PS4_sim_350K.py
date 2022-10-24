@@ -13,18 +13,24 @@ for category in (UserWarning, DeprecationWarning):
 
 data.make_supercell((3,3,3))
 
-parameters = MolecularDynamics(atoms = data, temperature = 350)
+parameters = MolecularDynamics(
+    atoms=data
+    temperature=500,  # 1000 K
+    ensemble='nvt',  # NVT ensemble
+    timestep=1, # 1fs,
+    trajectory="mo.traj",  # save trajectory to mo.traj
+    logfile="mo.log",  # log file for MD
+    loginterval=100,  # interval for record the log temperature = 350)
+)
 
-test = parameters.run(steps = 40)
+parameters.run(steps = 1000)
 
-print(type(test))
+#relaxer = Relaxer()  # This loads the default pre-trained model
 
-relaxer = Relaxer()  # This loads the default pre-trained model
+#relax_results = relaxer.relax(data, verbose=True)
 
-relax_results = relaxer.relax(data, verbose=True)
+#final_structure = relax_results['final_structure']
+#final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(data))
 
-final_structure = relax_results['final_structure']
-final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(data))
-
-print(f"Relaxed lattice parameter is {final_structure.lattice.abc[0]:.3f} Å")
-print(f"Final energy is {final_energy_per_atom:.3f} eV/atom")
+#print(f"Relaxed lattice parameter is {final_structure.lattice.abc[0]:.3f} Å")
+#print(f"Final energy is {final_energy_per_atom:.3f} eV/atom")
