@@ -14,7 +14,7 @@ for category in (UserWarning, DeprecationWarning):
 data.make_supercell((3,3,3))
 
 parameters = MolecularDynamics(
-    atoms=data
+    atoms=data,
     temperature=500,  # 1000 K
     ensemble='nvt',  # NVT ensemble
     timestep=1, # 1fs,
