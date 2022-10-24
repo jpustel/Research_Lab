@@ -1,7 +1,7 @@
 import warnings
 
-from m3gnet.models import Relaxer, MolecularDynamics
-#from pymatgen.core import Lattice, Structure
+from m3gnet.models import MolecularDynamics
+from pymatgen.core.structure import Structure
 
 
 from mp_api.client import MPRester
@@ -15,11 +15,11 @@ data.make_supercell((3,3,3))
 
 parameters = MolecularDynamics(
     atoms=data,
-    temperature=1000,  # 1000 K
+    temperature=500,  # 1000 K
     ensemble='nvt',  # NVT ensemble
     timestep=1, # 1fs,
-    trajectory="mo.traj",  # save trajectory to mo.traj
-    logfile="mo.log",  # log file for MD
+    trajectory="Research_Lab/Na3PS4/mo.traj",  # save trajectory to mo.traj
+    logfile="Research_Lab/Na3PS4/mo.log",  # log file for MD
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
