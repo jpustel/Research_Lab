@@ -27,9 +27,10 @@ parameters.run(steps = 1000)
 
 from pymatgen.analysis.diffusion.aimd.pathway import ProbabilityDensityAnalysis
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
-import json
+import numpy as np
 
-diff_analyzer = DiffusionAnalyzer.from_structures(structures=[data], specie="Na", temperature=500, time_step=1, step_skip=100)
+trajectories = np.load("Research_Lab/Na3PS4/mo.traj")
+diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
 
 pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
                                                          species=("Na", "Li"))
