@@ -28,7 +28,7 @@ parameters.run(steps = 1000)
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import json
 
-diff_analyzer = DiffusionAnalyzer.from_structures(structures=[data])
+diff_analyzer = DiffusionAnalyzer.from_structures(structures=[data], specie="Na", temperature=500, time_step=1, step_skip=100)
 
 pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
                                                          species=("Na", "Li"))
