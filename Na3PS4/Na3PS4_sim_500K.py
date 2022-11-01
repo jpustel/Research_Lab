@@ -29,7 +29,7 @@ from pymatgen.analysis.diffusion.aimd.pathway import ProbabilityDensityAnalysis
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import numpy as np
 
-trajectories = np.load("Research_Lab/Na3PS4/mo.traj", allow_pickle=True)
+trajectories = np.fromfile("Research_Lab/Na3PS4/mo.traj")
 pda = ProbabilityDensityAnalysis(data, trajectories, interval=0.5)
 #diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
 
