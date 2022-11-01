@@ -20,7 +20,7 @@ parameters = MolecularDynamics(
     timestep=1, # 1fs,
     trajectory="Research_Lab/Na3PS4/mo.traj",  # save trajectory to mo.traj
     logfile="Research_Lab/Na3PS4/mo.log",  # log file for MD
-    loginterval=100,  # interval for record the log temperature = 350)
+    loginterval=1,  # interval for record the log temperature = 350)
 )
 
 parameters.run(steps = 1000)
@@ -29,7 +29,7 @@ from pymatgen.analysis.diffusion.aimd.pathway import ProbabilityDensityAnalysis
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import numpy as np
 
-trajectories = np.load("Research_Lab/Na3PS4/mo.traj")
+trajectories = np.load("Research_Lab/Na3PS4/mo.traj", allow_pickle=True)
 diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
 
 pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
