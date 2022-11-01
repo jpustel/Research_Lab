@@ -23,13 +23,12 @@ parameters = MolecularDynamics(
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
-temp = parameters.run(steps = 1000)
+parameters.run(steps = 1000)
 
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import json
 
-#data
-diff_analyzer = DiffusionAnalyzer.from_dict(temp)
+diff_analyzer = DiffusionAnalyzer.from_dict(data)
 
 pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
                                                          species=("Na", "Li"))
