@@ -30,10 +30,10 @@ from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import numpy as np
 
 trajectories = np.load("Research_Lab/Na3PS4/mo.log", allow_pickle=True)
-diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
+pda = ProbabilityDensityAnalysis(data, trajectories, interval=0.5)
+#diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
 
-pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
-                                                         species=("Na", "Li"))
+#pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, species=("Na", "Li"))
 #Save probability distribution to a CHGCAR-like file
 pda.to_chgcar(filename="CHGCAR_new2.vasp")
 
