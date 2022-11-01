@@ -25,12 +25,17 @@ parameters = MolecularDynamics(
 
 parameters.run(steps = 1000)
 
-#relaxer = Relaxer()  # This loads the default pre-trained model
+from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
+import json
 
-#relax_results = relaxer.relax(data, verbose=True)
+#data
+diff_analyzer = DiffusionAnalyzer.from_dict(parameters)
 
-#final_structure = relax_results['final_structure']
-#final_energy_per_atom = float(relax_results['trajectory'].energies[-1] / len(data))
+pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, 
+                                                         species=("Na", "Li"))
+#Save probability distribution to a CHGCAR-like file
+pda.to_chgcar(filename="CHGCAR_new2.vasp")
 
-#print(f"Relaxed lattice parameter is {final_structure.lattice.abc[0]:.3f} Å")
-#print(f"Final energy is {final_energy_per_atom:.3f} eV/atom")
+print("Maximum: %s, Minimum: %s" % (pda.Pr.max(), pda.Pr.min()))
+# \int P(r)d^3r = 1
+print("Total probability: %s" % np.sum(pda.Pr * pda.structure.lattice.volume / pda.lens[0]/pda.lens[1]/pda.lens[2]))
