@@ -25,6 +25,7 @@ parameters = MolecularDynamics(
 
 parameters.run(steps = 1000)
 
+from pymatgen.analysis.diffusion.aimd.pathway import ProbabilityDensityAnalysis
 from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
 import json
 
