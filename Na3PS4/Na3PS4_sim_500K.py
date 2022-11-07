@@ -20,23 +20,26 @@ parameters = MolecularDynamics(
     timestep=1, # 1fs,
     trajectory="Research_Lab/Na3PS4/mo.traj",  # save trajectory to mo.traj
     logfile="Research_Lab/Na3PS4/mo.log",  # log file for MD
-    loginterval=1,  # interval for record the log temperature = 350)
+    loginterval=1000,  # interval for record the log temperature = 350)
 )
 
 parameters.run(steps = 1000)
 
-from pymatgen.analysis.diffusion.aimd.pathway import ProbabilityDensityAnalysis
-from pymatgen.analysis.diffusion.analyzer import DiffusionAnalyzer
-import numpy as np
+from pymatgen.analysis.diffusion.analyzer import (
+    DiffusionAnalyzer,
+    get_extrapolated_conductivity,
+)
 
-trajectories = np.fromfile("Research_Lab/Na3PS4/mo.log")
-pda = ProbabilityDensityAnalysis(data, trajectories, interval=0.5)
-#diff_analyzer = DiffusionAnalyzer.from_structures(data, trajectories, interval=0.5)
+analyzers = DiffusionAnalyzer.from_structure(data, "Na", 500, 1, 100)
+f = open("Research_Lab/Na3PS4/mo.traj", "r")
+diffusivities = [f.read()]
 
-#pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=0.5, species=("Na", "Li"))
-#Save probability distribution to a CHGCAR-like file
-pda.to_chgcar(filename="CHGCAR_new2.vasp")
+rts = get_extrapolated_conductivity(
+    [500],
+    diffusivities,
+    new_temp=300,
+    structure=analyzers[800].structure,
+    species="Na",
+)
 
-print("Maximum: %s, Minimum: %s" % (pda.Pr.max(), pda.Pr.min()))
-# \int P(r)d^3r = 1
-print("Total probability: %s" % np.sum(pda.Pr * pda.structure.lattice.volume / pda.lens[0]/pda.lens[1]/pda.lens[2]))
+print("The Na ionic conductivity for Na3PS4 at 500 K is %.4f mS/cm" % rts)
