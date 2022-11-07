@@ -30,7 +30,7 @@ from pymatgen.analysis.diffusion.analyzer import (
     get_extrapolated_conductivity,
 )
 
-analyzers = DiffusionAnalyzer.from_structure(data, "Na", 500, 1, 100)
+analyzers = DiffusionAnalyzer.from_structures(data, "Na", 500, 1, 100)
 f = open("Research_Lab/Na3PS4/mo.traj", "r")
 diffusivities = [f.read()]
 
