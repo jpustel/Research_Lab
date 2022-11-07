@@ -29,14 +29,16 @@ from pymatgen.analysis.diffusion.analyzer import (
     DiffusionAnalyzer,
     get_extrapolated_conductivity,
 )
+import json
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
 f = open("Research_Lab/Na3PS4/mo.traj", "r")
-diffusivities = [f.read()]
+with open("Research_Lab/Na3PS4/mo.traj") as f:
+    d = json.load(f)
 
 rts = get_extrapolated_conductivity(
     [500],
-    diffusivities,
+    f,
     new_temp=300,
     structure=analyzers[800].structure,
     species="Na",
