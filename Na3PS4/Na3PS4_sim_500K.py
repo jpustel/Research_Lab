@@ -33,7 +33,7 @@ import json
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
 f = open("Research_Lab/Na3PS4/mo.traj", "r")
-with open("Research_Lab/Na3PS4/mo.traj") as f:
+with open("Research_Lab/Na3PS4/mo.traj", mode="rb") as f:
     d = json.load(f)
 
 rts = get_extrapolated_conductivity(
