@@ -41,7 +41,7 @@ rts = get_extrapolated_conductivity(
     [500],
     traj,
     new_temp=300,
-    structure=analyzers[800].structure,
+    structure=analyzers[500].structure,
     species="Na",
 )
 
