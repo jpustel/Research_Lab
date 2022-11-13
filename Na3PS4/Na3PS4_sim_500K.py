@@ -29,6 +29,8 @@ from pymatgen.analysis.diffusion.analyzer import (
     DiffusionAnalyzer,
     get_extrapolated_conductivity,
 )
+from ase.io.trajectory import Trajectory
+traj = Trajectory("Research_Lab/Na3PS4/mo.traj")
 import json
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
@@ -38,7 +40,7 @@ with open("Research_Lab/Na3PS4/mo.traj", mode="rb") as f:
 
 rts = get_extrapolated_conductivity(
     [500],
-    f,
+    traj,
     new_temp=300,
     structure=analyzers[800].structure,
     species="Na",
