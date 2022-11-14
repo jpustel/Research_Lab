@@ -32,7 +32,7 @@ from pymatgen.analysis.diffusion.analyzer import (
 from ase.io.trajectory import Trajectory
 import matplotlib.pyplot as plt
 
-traj = Trajectory("Research_Lab/Na3PS4/mo.traj")
+traj = Trajectory("Research_Lab/Na3PS4/mo.traj", mode="r")
 diffusivities = [traj.diffusivity]
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
