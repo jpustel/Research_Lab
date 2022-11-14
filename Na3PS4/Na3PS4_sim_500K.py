@@ -43,8 +43,10 @@ rts = get_extrapolated_conductivity(
     temperatures,
     [Na_diffuse],
     new_temp=300,
-    structure=analyzers[700].structure,
+    structure=analyzers[500].structure,
     species="Na",
 )
 
-print("The Na ionic conductivity for Na3PS4 at 300 K is %.4f mS/cm" % rts)
+print(Na_diffuse)
+print(rts)
+#print("The Na ionic conductivity for Na3PS4 at 300 K is %.4f mS/cm" % rts)
