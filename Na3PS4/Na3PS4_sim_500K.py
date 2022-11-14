@@ -33,13 +33,10 @@ from ase.io.trajectory import Trajectory
 traj = Trajectory("Research_Lab/Na3PS4/mo.traj")
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
-#f = open("Research_Lab/Na3PS4/mo.traj", "r")
-#with open("Research_Lab/Na3PS4/mo.traj", mode="rb") as f:
-    #d = json.load(f)
 
 rts = get_extrapolated_conductivity(
     [500],
-    traj,
+    traj.diffusivity,
     new_temp=300,
     structure=analyzers.structure,
     species="Na",
