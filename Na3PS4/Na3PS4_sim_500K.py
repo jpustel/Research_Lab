@@ -19,7 +19,7 @@ parameters = MolecularDynamics(
     timestep=1, # 1fs,
     trajectory="Research_Lab/Na3PS4/mo.traj",  # save trajectory to mo.traj
     logfile="Research_Lab/Na3PS4/mo.log",  # log file for MD
-    loginterval=1000,  # interval for record the log temperature = 350)
+    loginterval=100,  # interval for record the log temperature = 350)
 )
 
 parameters.run(steps = 1000)
@@ -34,17 +34,17 @@ import matplotlib.pyplot as plt
 
 traj = Trajectory("Research_Lab/Na3PS4/mo.traj", mode="r")
 temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
-diffusivity, slope = temp.get_diffusion_coefficients()
+diffusivity, std = temp.get_diffusion_coefficients()
+diffusivity = diffusivity[0]*0.1
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
 
 rts = get_extrapolated_conductivity(
-    [300, 500],
+    [500],
     [diffusivity],
-    new_temp=200,
+    new_temp=300,
     structure=analyzers.structure,
     species="Na",
 )
-print(rts)
-print(diffusivity)
+
 print("The Na ionic conductivity for Na3PS4 at 500 K is %.4f mS/cm" % rts)
