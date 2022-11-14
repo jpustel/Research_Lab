@@ -39,9 +39,9 @@ diffusivity, slope = temp.get_diffusion_coefficients()
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
 
 rts = get_extrapolated_conductivity(
-    [500],
+    [300, 500],
     [diffusivity],
-    new_temp=300,
+    new_temp=200,
     structure=analyzers.structure,
     species="Na",
 )
