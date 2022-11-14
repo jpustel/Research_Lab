@@ -1,7 +1,11 @@
 import warnings
-
+from pymatgen.analysis.diffusion.analyzer import (
+    DiffusionAnalyzer,
+    get_extrapolated_conductivity,
+)
+from ase.io.trajectory import Trajectory
+from ase.md.analysis import DiffusionCoefficient
 from m3gnet.models import MolecularDynamics
-from pymatgen.core.structure import Structure
 from mp_api.client import MPRester
 
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
@@ -10,41 +14,37 @@ with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-data.make_supercell((3,3,3))
+temperatures = [300, 500, 700, 900, 1100]
+Na_diffuse = dict.fromkeys(temperatures)
+analyzers = dict.fromkeys(temperatures)
 
-parameters = MolecularDynamics(
-    atoms=data,
-    temperature=500,  # 1000 K
-    ensemble='nvt',  # NVT ensemble
-    timestep=1, # 1fs,
-    trajectory="Research_Lab/Na3PS4/mo.traj",  # save trajectory to mo.traj
-    logfile="Research_Lab/Na3PS4/mo.log",  # log file for MD
-    loginterval=100,  # interval for record the log temperature = 350)
-)
+for t in temperatures:
+    data.make_supercell((3,3,3))
 
-parameters.run(steps = 1000)
+    parameters = MolecularDynamics(
+        atoms=data,
+        temperature=t,  # 1000 K
+        ensemble='nvt',  # NVT ensemble
+        timestep=1, # 1fs,
+        trajectory="Research_Lab/Na3PS4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
+        logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
+        loginterval=100,  # interval for record the log temperature = 350)
+    )
+    parameters.run(steps = 1000)
 
-from pymatgen.analysis.diffusion.analyzer import (
-    DiffusionAnalyzer,
-    get_extrapolated_conductivity,
-)
-from ase.io.trajectory import Trajectory
-from ase.md.analysis import DiffusionCoefficient
-import matplotlib.pyplot as plt
+    traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
+    temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
+    atoms_diffuse, std = temp.get_diffusion_coefficients()
+    Na_diffuse[t] = atoms_diffuse[0]*0.1
 
-traj = Trajectory("Research_Lab/Na3PS4/mo.traj", mode="r")
-temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
-diffusivity, std = temp.get_diffusion_coefficients()
-diffusivity = diffusivity[0]*0.1
-
-analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
+    analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
 
 rts = get_extrapolated_conductivity(
-    [500],
-    [diffusivity],
+    temperatures,
+    [Na_diffuse[700]],
     new_temp=300,
-    structure=analyzers.structure,
+    structure=analyzers[700].structure,
     species="Na",
 )
 
-print("The Na ionic conductivity for Na3PS4 at 500 K is %.4f mS/cm" % rts)
+print("The Na ionic conductivity for Na3PS4 at 300 K is %.4f mS/cm" % rts)
