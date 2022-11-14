@@ -41,7 +41,7 @@ for t in temperatures:
 
 rts = get_extrapolated_conductivity(
     temperatures,
-    [Na_diffuse[700]],
+    [Na_diffuse],
     new_temp=300,
     structure=analyzers[700].structure,
     species="Na",
