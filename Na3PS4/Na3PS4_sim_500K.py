@@ -2,9 +2,8 @@ import warnings
 
 from m3gnet.models import MolecularDynamics
 from pymatgen.core.structure import Structure
-
-
 from mp_api.client import MPRester
+
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-985584")
 
@@ -46,5 +45,6 @@ rts = get_extrapolated_conductivity(
     structure=analyzers.structure,
     species="Na",
 )
-
+print(rts)
+print(diffusivity)
 print("The Na ionic conductivity for Na3PS4 at 500 K is %.4f mS/cm" % rts)
