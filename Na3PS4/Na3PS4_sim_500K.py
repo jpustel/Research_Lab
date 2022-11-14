@@ -30,13 +30,16 @@ from pymatgen.analysis.diffusion.analyzer import (
     get_extrapolated_conductivity,
 )
 from ase.io.trajectory import Trajectory
+import matplotlib.pyplot as plt
+
 traj = Trajectory("Research_Lab/Na3PS4/mo.traj")
+diffusivities = [traj.diffusivity]
 
 analyzers = DiffusionAnalyzer.from_structures([data], "Na", 500, 1, 100)
 
 rts = get_extrapolated_conductivity(
     [500],
-    traj.diffusivity,
+    diffusivities,
     new_temp=300,
     structure=analyzers.structure,
     species="Na",
