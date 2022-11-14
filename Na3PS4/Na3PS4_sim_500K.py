@@ -38,6 +38,7 @@ for t in temperatures:
     Na_diffuse[t] = atoms_diffuse[0]*0.1
 
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
+    print(str(t) + " Completed")
 
 rts = get_extrapolated_conductivity(
     temperatures,
