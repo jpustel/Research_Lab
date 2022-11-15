@@ -8,8 +8,7 @@ from ase.md.analysis import DiffusionCoefficient
 from m3gnet.models import MolecularDynamics
 from mp_api.client import MPRester
 
-with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
-    data = mpr.get_structure_by_material_id("mp-985584")
+
 
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
@@ -19,6 +18,8 @@ Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
 for t in temperatures:
+    with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
+        data = mpr.get_structure_by_material_id("mp-985584")
     data.make_supercell((3,3,3))
 
     parameters = MolecularDynamics(
