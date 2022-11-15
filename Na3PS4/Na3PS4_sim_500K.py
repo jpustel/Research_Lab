@@ -33,7 +33,9 @@ for t in temperatures:
         logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
         loginterval=100,  # interval for record the log temperature = 350)
     )
+    print(str(t) + "before")
     parameters.run(steps = 1000)
+    print(str(t) + "after")
 
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
