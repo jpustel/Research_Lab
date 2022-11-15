@@ -29,8 +29,8 @@ for t in temperatures:
         temperature=t,  # 1000 K
         ensemble='nvt',  # NVT ensemble
         timestep=1, # 1fs,
-        trajectory="Research_Lab/Na3PS4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
-        logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
+        trajectory="Research_Lab/Na3PS4/trajectories/mo.traj",  # save trajectory to mo.traj
+        logfile="Research_Lab/Na3PS4/mo_log/mo.log",  # log file for MD
         loginterval=100,  # interval for record the log temperature = 350)
     )
     print(str(t) + "before")
