@@ -16,13 +16,14 @@ for category in (UserWarning, DeprecationWarning):
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     material = mpr.get_structure_by_material_id("mp-985584")
 
-temperatures = [500]
+temperatures = [300, 500, 700, 900, 1100]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
+data = material
+data.make_supercell((3,3,3))
+
 for t in temperatures:
-    data = material
-    data.make_supercell((3,3,3))
 
     parameters = MolecularDynamics(
         atoms=data,
