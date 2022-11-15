@@ -16,7 +16,7 @@ for category in (UserWarning, DeprecationWarning):
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     material = mpr.get_structure_by_material_id("mp-985584")
 
-temperatures = [300, 500]
+temperatures = [300, 500, 700, 900, 1100]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
@@ -53,10 +53,8 @@ rts = get_extrapolated_conductivity(
     temperatures,
     diffusivities,
     new_temp=300,
-    structure=analyzers[500].structure,
+    structure=analyzers[300].structure,
     species="Na",
 )
 
-print(Na_diffuse)
-print(rts)
-#print("The Na ionic conductivity for Na3PS4 at 300 K is %.4f mS/cm" % rts)
+print("The Na ionic conductivity for Na3PS4 at 300 K is %.4f mS/cm" % rts)
