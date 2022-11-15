@@ -40,11 +40,13 @@ for t in temperatures:
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
     print(str(t) + " Completed")
 
-diffusivities = [Na_diffuse]
+diffusivities = []
+for diff in Na_diffuse.values():
+    diffusivities.append(diff)
 
 rts = get_extrapolated_conductivity(
     temperatures,
-    [Na_diffuse[500]],
+    diffusivities,
     new_temp=300,
     structure=analyzers[500].structure,
     species="Na",
