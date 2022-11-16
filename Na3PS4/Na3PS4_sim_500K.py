@@ -33,7 +33,7 @@ for t in temperatures:
         logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
         loginterval=100,  # interval for record the log temperature = 350)
     )
-    parameters.run(steps = 10000)
+    parameters.run(steps = 1000)
 
     #Read .traj file and calculate Diffusion Coefficients
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
