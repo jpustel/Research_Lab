@@ -23,7 +23,7 @@ analyzers = dict.fromkeys(temperatures)
 data.make_supercell((3,3,3))
 
 for t in temperatures:
-
+    #Run MD to get trajectories
     parameters = MolecularDynamics(
         atoms=data,
         temperature=t,  # 1000 K
@@ -33,19 +33,21 @@ for t in temperatures:
         logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
         loginterval=100,  # interval for record the log temperature = 350)
     )
-    parameters.run(steps = 1000)
+    parameters.run(steps = 10000)
 
+    #Read .traj file and calculate Diffusion Coefficients
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
     Na_diffuse[t] = atoms_diffuse[0]*0.1
-
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
 
+#Create array of diffusivities corresponding to temperature array
 diffusivities = []
 for diff in Na_diffuse.values():
     diffusivities.append(diff)
 
+#Extrapolate conductivity using temperatures and diffusivities to find conductivity at 300 K
 rts = get_extrapolated_conductivity(
     temperatures,
     diffusivities,
