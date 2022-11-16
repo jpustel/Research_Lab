@@ -14,13 +14,12 @@ for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
-    material = mpr.get_structure_by_material_id("mp-985584")
+    data = mpr.get_structure_by_material_id("mp-985584")
 
 temperatures = [300, 500, 700, 900, 1100]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
-data = material
 data.make_supercell((3,3,3))
 
 for t in temperatures:
@@ -30,13 +29,11 @@ for t in temperatures:
         temperature=t,  # 1000 K
         ensemble='nvt',  # NVT ensemble
         timestep=1, # 1fs,
-        trajectory="Research_Lab/Na3PS4/trajectories/mo.traj",  # save trajectory to mo.traj
-        logfile="Research_Lab/Na3PS4/mo_log/mo.log",  # log file for MD
+        trajectory="Research_Lab/Na3PS4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
+        logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
         loginterval=100,  # interval for record the log temperature = 350)
     )
-    print(str(t) + "before")
     parameters.run(steps = 1000)
-    print(str(t) + "after")
 
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
@@ -44,7 +41,6 @@ for t in temperatures:
     Na_diffuse[t] = atoms_diffuse[0]*0.1
 
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
-    print(str(t) + " Completed")
 
 diffusivities = []
 for diff in Na_diffuse.values():
