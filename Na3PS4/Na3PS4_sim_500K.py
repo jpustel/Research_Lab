@@ -37,9 +37,9 @@ for t in temperatures:
 
     #Read .traj file and calculate Diffusion Coefficients
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
-    temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
+    temp = DiffusionCoefficient(traj, 1, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
-    Na_diffuse[t] = atoms_diffuse[0]*0.1
+    Na_diffuse[t] = atoms_diffuse[0]
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
 
 #Create array of diffusivities corresponding to temperature array
