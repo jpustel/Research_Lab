@@ -31,15 +31,15 @@ for t in temperatures:
         timestep=1, # 1fs,
         trajectory="Research_Lab/Na3PS4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
         logfile="Research_Lab/Na3PS4/mo_log/mo.log" + str(t),  # log file for MD
-        loginterval=100,  # interval for record the log temperature = 350)
+        loginterval=10000,  # interval for record the log temperature = 350)
     )
-    parameters.run(steps = 1000)
+    parameters.run(steps = 100000)
 
     #Read .traj file and calculate Diffusion Coefficients
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
-    Na_diffuse[t] = atoms_diffuse[0]
+    Na_diffuse[t] = atoms_diffuse[0]*0.1
     analyzers[t] = DiffusionAnalyzer.from_structures([data], "Na", t, 1, 100)
 
 #Create array of diffusivities corresponding to temperature array
