@@ -20,7 +20,7 @@ data.make_supercell((3,3,3))
 
 parameters = MolecularDynamics(
     atoms=data,
-    temperature=300,  # 1000 K
+    temperature=t,  # 1000 K
     ensemble='nvt',  # NVT ensemble
     timestep=1, # 1fs,
     trajectory="Research_Lab/Na3PS4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
