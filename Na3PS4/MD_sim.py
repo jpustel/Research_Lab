@@ -11,7 +11,7 @@ from mp_api.client import MPRester
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-t = 500
+t = 700
 
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-985584")
