@@ -28,4 +28,4 @@ parameters = MolecularDynamics(
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
-parameters.run(steps = 1000)
+parameters.run(steps = 100000)
