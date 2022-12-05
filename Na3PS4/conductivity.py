@@ -14,13 +14,14 @@ for category in (UserWarning, DeprecationWarning):
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-985584")
 
-temperatures = [300, 500, 700, 900, 1100]
+#temperatures = [300, 500, 700, 900, 1100]
+temperatures = [300]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
 for t in temperatures:
     traj = Trajectory("Research_Lab/Na3PS4/trajectories/mo.traj" + str(t), mode="r")
-    temp = DiffusionCoefficient(traj, 1.0, atom_indices=None, molecule=False)
+    temp = DiffusionCoefficient(traj, 1, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
     Na_diffuse[t] = atoms_diffuse[0]*0.1
 
