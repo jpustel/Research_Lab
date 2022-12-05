@@ -1,10 +1,5 @@
 import warnings
-from pymatgen.analysis.diffusion.analyzer import (
-    DiffusionAnalyzer,
-    get_extrapolated_conductivity,
-)
-from ase.io.trajectory import Trajectory
-from ase.md.analysis import DiffusionCoefficient
+
 from m3gnet.models import MolecularDynamics
 from mp_api.client import MPRester
 
