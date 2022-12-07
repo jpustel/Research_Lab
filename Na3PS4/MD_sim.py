@@ -1,4 +1,5 @@
 import warnings
+import time
 
 from m3gnet.models import MolecularDynamics
 from mp_api.client import MPRester
@@ -8,6 +9,7 @@ for category in (UserWarning, DeprecationWarning):
 
 t = 700
 
+start = time.time()
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-985584")
 
@@ -24,3 +26,6 @@ parameters = MolecularDynamics(
 )
 
 parameters.run(steps = 100000)
+
+end = time.time()
+print(f"Time of Simulation: {(end - start):.1f}")
