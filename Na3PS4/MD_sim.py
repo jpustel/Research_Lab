@@ -28,4 +28,9 @@ parameters = MolecularDynamics(
 parameters.run(steps = 100000)
 
 end = time.time()
-print(f"Time of Simulation: {(end - start):.1f}")
+print(f"Secs: {int(end - start)}")
+
+hr, rem = divmod(end-start, 3600)
+mins, sec = divmod(rem, 60) 
+
+print("Time of Simulation:{:0>2}:{:0>2}:{:05.2f}".format(int(hr),int(mins),sec))
