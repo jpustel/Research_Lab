@@ -7,13 +7,17 @@ from mp_api.client import MPRester
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-t = 700
+t = 300
 
 start = time.time()
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-985584")
+a = 1
+b = 1
+c = 1
+num_molecules = a*b*c
 
-data.make_supercell((2,1,1))
+data.make_supercell((a,b,c))
 
 parameters = MolecularDynamics(
     atoms=data,
@@ -25,9 +29,10 @@ parameters = MolecularDynamics(
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
-parameters.run(steps = 100000)
+parameters.run(steps = 10000)
 
 end = time.time()
+print(f"Number of Molecules: {num_molecules}")
 print(f"Secs: {int(end - start)}")
 
 hr, rem = divmod(end-start, 3600)
