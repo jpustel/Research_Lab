@@ -1,12 +1,11 @@
 #!/bin/bash
 #PBS -q condo
-#PBS -N m3gnet_test
+#PBS -N NaBH4_Energy
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=01:00:00
+#PBS -l walltime=08:00:00
 #PBS -o $PBS_JOBID.log
 #PBS -e err
 #PBS -M jpusteln@ucsd.edu
 #PBS -V
 #PBS -A ong-group
-nohup python3 -u Research_Lab/m3gnet_test.py >> Research_Lab/output 2>&1
-
+nohup python3 -u Research_Lab/NaBH4/MD_sim_900.py >> Research_Lab/NaBH4/output900 2>&1

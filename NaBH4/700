@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -q condo
+#PBS -N NaBH4_Energy
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=08:00:00
+#PBS -o $PBS_JOBID.log
+#PBS -e err
+#PBS -M jpusteln@ucsd.edu
+#PBS -V
+#PBS -A ong-group
+nohup python3 -u Research_Lab/NaBH4/MD_sim_700.py >> Research_Lab/NaBH4/output700 2>&1
