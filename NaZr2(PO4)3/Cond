@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -q condo
+#PBS -N NaZr2(PO4)3_Energy
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=01:00:00
+#PBS -o $PBS_JOBID.log
+#PBS -e err
+#PBS -M jpusteln@ucsd.edu
+#PBS -V
+#PBS -A ong-group
+nohup python3 -u Research_Lab/NaZr2(PO4)3/conductivity.py >> Research_Lab/NaZr2(PO4)3/output 2>&1

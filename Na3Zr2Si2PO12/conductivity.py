@@ -16,6 +16,8 @@ for category in (UserWarning, DeprecationWarning):
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-532695")
 
+data.make_supercell((2,2,2))
+
 temperatures = [300, 500, 700, 900]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
