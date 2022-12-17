@@ -13,19 +13,19 @@ start = time.time()
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     data = mpr.get_structure_by_material_id("mp-23705")
 
-data.make_supercell((3,3,3))
+data.make_supercell((2,2,2))
 
 parameters = MolecularDynamics(
     atoms=data,
     temperature=t,  # 1000 K
     ensemble='nvt',  # NVT ensemble
-    timestep=1, # 1fs,
+    timestep=2, # 1fs,
     trajectory="Research_Lab/Na3AlH4/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
     logfile="Research_Lab/Na3AlH4/mo_log/mo.log" + str(t),  # log file for MD
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
-parameters.run(steps = 100000)
+parameters.run(steps = 50000)
 
 end = time.time()
 print(f"Secs: {int(end - start)}")
