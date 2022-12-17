@@ -7,7 +7,7 @@ from mp_api.client import MPRester
 for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
-t = 500
+t = 900
 
 start = time.time()
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
@@ -20,8 +20,8 @@ parameters = MolecularDynamics(
     temperature=t,  # 1000 K
     ensemble='nvt',  # NVT ensemble
     timestep=1, # 1fs,
-    trajectory="Research_Lab/NaZr2(PO4)3/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
-    logfile="Research_Lab/NaZr2(PO4)3/mo_log/mo.log" + str(t),  # log file for MD
+    trajectory="Research_Lab/NaZr2P3O12/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
+    logfile="Research_Lab/NaZr2P3O12/mo_log/mo.log" + str(t),  # log file for MD
     loginterval=100,  # interval for record the log temperature = 350)
 )
 

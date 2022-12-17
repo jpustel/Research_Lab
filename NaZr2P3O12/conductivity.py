@@ -23,7 +23,7 @@ Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
 for t in temperatures:
-    traj = Trajectory("Research_Lab/NaZr2(PO4)3/trajectories/mo.traj" + str(t), mode="r")
+    traj = Trajectory("Research_Lab/NaZr2P3O12/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
     Na_diffuse[t] = atoms_diffuse[0]*0.1

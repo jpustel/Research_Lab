@@ -8,4 +8,4 @@
 #PBS -M jpusteln@ucsd.edu
 #PBS -V
 #PBS -A ong-group
-nohup python3 -u Research_Lab/NaZr2(PO4)3/MD_sim_900.py >> Research_Lab/NaZr2(PO4)3/output900 2>&1
+nohup python3 -u Research_Lab/NaZr2P3O12/MD_sim_500.py >> Research_Lab/NaZr2P3O12/output500 2>&1
