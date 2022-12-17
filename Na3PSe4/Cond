@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -q condo
+#PBS -N Na3PSe4_Energy
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=01:00:00
+#PBS -o $PBS_JOBID.log
+#PBS -e err
+#PBS -M jpusteln@ucsd.edu
+#PBS -V
+#PBS -A ong-group
+nohup python3 -u Research_Lab/Na3PSe4/conductivity.py >> Research_Lab/Na3PSe4/output 2>&1
