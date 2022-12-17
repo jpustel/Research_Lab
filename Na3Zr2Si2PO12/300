@@ -1,8 +1,8 @@
 #!/bin/bash
-#PBS -q home-ong
+#PBS -q condo
 #PBS -N Na3Zr2Si2PO12_Energy
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=16:00:00
+#PBS -l walltime=09:00:00
 #PBS -o $PBS_JOBID.log
 #PBS -e err
 #PBS -M jpusteln@ucsd.edu
