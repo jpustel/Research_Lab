@@ -10,6 +10,8 @@ for category in (UserWarning, DeprecationWarning):
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
     mo = mpr.get_structure_by_material_id("mp-568950")
 
+mo.make_supercell((2,2,2))
+
 relaxer = Relaxer()  # This loads the default pre-trained model
 
 relax_results = relaxer.relax(mo, verbose=True)
