@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -q condo
-#PBS -N Na3AlH6_Time
+#PBS -N NaBH4_Relax
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=08:00:00
 #PBS -o $PBS_JOBID.log
@@ -8,4 +8,4 @@
 #PBS -M jpusteln@ucsd.edu
 #PBS -V
 #PBS -A ong-group
-nohup python3 -u Research_Lab/Na3AlH6/time/time_111.py >> Research_Lab/Na3AlH6/time/output111 2>&1
+nohup python3 -u Research_Lab/NaBH4/time/m3gnet_relax.py >> Research_Lab/NaBH4/time/Final_E 2>&1
