@@ -14,7 +14,7 @@ for category in (UserWarning, DeprecationWarning):
     warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
 with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
-    data = mpr.get_structure_by_material_id("mp-23705")
+    data = mpr.get_structure_by_material_id("mp-568950")
 
 data.make_supercell((2,2,2))
 
@@ -23,7 +23,7 @@ Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
 for t in temperatures:
-    traj = Trajectory("Research_Lab/Na3AlH4/trajectories/mo.traj" + str(t), mode="r")
+    traj = Trajectory("Research_Lab/Na3AlH6/trajectories/mo.traj" + str(t), mode="r")
     temp = DiffusionCoefficient(traj, 1, atom_indices=None, molecule=False)
     atoms_diffuse, std = temp.get_diffusion_coefficients()
     Na_diffuse[t] = atoms_diffuse[0]*0.1
