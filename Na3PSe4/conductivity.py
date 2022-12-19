@@ -18,7 +18,8 @@ with MPRester(api_key="bl5ZA4p8qFoei37Lo61kGU9Yr0JD6TE5") as mpr:
 
 data.make_supercell((3,3,3))
 
-temperatures = [300, 500, 700, 900]
+# Using higher temperatures to test
+temperatures = [500, 700, 900, 1100]
 Na_diffuse = dict.fromkeys(temperatures)
 analyzers = dict.fromkeys(temperatures)
 
@@ -41,7 +42,7 @@ rts = get_extrapolated_conductivity(
     temperatures,
     diffusivities,
     new_temp=300,
-    structure=analyzers[300].structure,
+    structure=analyzers[700].structure,
     species="Na",
 )
 
