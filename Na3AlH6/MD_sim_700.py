@@ -19,13 +19,13 @@ parameters = MolecularDynamics(
     atoms=data,
     temperature=t,  # 1000 K
     ensemble='nvt',  # NVT ensemble
-    timestep=2, # 1fs,
+    timestep=1, # 1fs,
     trajectory="Research_Lab/Na3AlH6/trajectories/mo.traj" + str(t),  # save trajectory to mo.traj
     logfile="Research_Lab/Na3AlH6/mo_log/mo.log" + str(t),  # log file for MD
     loginterval=100,  # interval for record the log temperature = 350)
 )
 
-parameters.run(steps = 50000)
+parameters.run(steps = 100000)
 
 end = time.time()
 print(f"Secs: {int(end - start)}")
